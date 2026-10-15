@@ -1,0 +1,242 @@
+{
+  "sources": [
+    "data/campus_customs_new.db",
+    "output/audit_trail.json"
+  ],
+  "cash": {
+    "starting_balance": 3400.0,
+    "total_paid": 3240.0,
+    "ending_balance": 160.0,
+    "matches_cash_accounts": true
+  },
+  "tickets": [
+    {
+      "id": 101,
+      "type": "customer_order",
+      "subject": "Bulldog tee",
+      "requester": "Tauhid Zaman",
+      "final_status": "resolved",
+      "short_outcome": "Order not fulfilled yet: CC-TEE-WHITE size S has 0 in stock and Bulldog Print Co will not ship while invoice 501 ($840.00) is unpaid. Accounting prepared the $840.00 payment, a human approved it, and Customer Service saved a delay note for Tauhid Zaman (a draft, not sent).",
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "role_in_run": "Led the ticket and made the final call",
+          "tools_used": [
+            "get_ticket",
+            "get_today"
+          ],
+          "final_call": "Do not fulfill the order now; request human approval for the overdue $840.00 invoice 501 to unblock Bulldog Print Co. restocking, then reassess availability of one CC-TEE-WHITE size S."
+        },
+        {
+          "agent": "inventory",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_inventory",
+            "get_invoice_status",
+            "get_ticket",
+            "get_today",
+            "get_vendors"
+          ],
+          "reports": [
+            "Not fulfillable from current stock: CC-TEE-WHITE size S has 0 in stock, so the shortfall for quantity 1 is 1. Bulldog Print Co is the apparel reprint vendor, but restocking is blocked because it has an open unpaid invoice. The invoice is overdue as of the shop date.",
+            "Ticket 101 requests 1 CC-TEE-WHITE in size S. Inventory has 0, so the shortfall is 1. Bulldog Print Co is the matching apparel reprint vendor, with a 5-day lead time, but it cannot ship while open invoice 501 remains unpaid. Invoice 501 is $840, due 2026-08-28, and is overdue as of 2026-08-31. For the customer delay draft, state the stockout and that restocking is blocked pending invoice resolution; do not promise a ship or arrival date. The vendor's 5-day lead time applies once the block is cleared."
+          ]
+        },
+        {
+          "agent": "accounting",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_cash_balance",
+            "get_invoice_status",
+            "get_sku_pricing",
+            "get_today",
+            "get_vendors",
+            "prepare_payment"
+          ],
+          "reports": [
+            "Invoice 501 is open and overdue as of 2026-08-31. It is Bulldog Print Co.'s only open invoice; the vendor will not ship new product while it has an open unpaid invoice. Checking has enough cash to cover the invoice, but I did not queue a payment. At list price, one CC-TEE-WHITE unit has a $20.00 margin before other costs.",
+            "Queued payment request 1 for invoice 501, amount $840.00. Status is pending approval; nothing was paid. Checking cash balance is $3,400.00, which would leave $2,560.00 after approval and payment. Invoice 501 is open and overdue: it was due 2026-08-28, and today is 2026-08-31. Bulldog Print Co. has invoice 501 open ($840.00); paying it is intended to clear the vendor's shipping block for the requested restock."
+          ]
+        },
+        {
+          "agent": "customer_service",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_ticket",
+            "get_today",
+            "save_customer_draft"
+          ],
+          "reports": [
+            "Saved customer-message draft 1 on the board for Tauhid Zaman; status is draft. Subject: “Update on your Bulldog tee.” It explains the size-S tee is out of stock and restocking is delayed pending resolution of an outstanding account issue. It says restocking is estimated at about five days once cleared, without promising a ship or arrival date. No message was sent."
+          ]
+        }
+      ],
+      "human_approvals": [
+        {
+          "payment_request_id": 1,
+          "what": "Invoice 501 (Bulldog Print Co: Rush reprint CC-TEE-WHITE S)",
+          "amount": 840.0,
+          "prepared_by": "accounting",
+          "approved_by": "JY",
+          "requested_at_utc": "2026-10-14 23:56:26 UTC",
+          "approved_at_utc": "2026-10-14 23:57:29 UTC",
+          "status": "paid",
+          "approved_after_run_finished": true
+        }
+      ],
+      "cash_change": -840.0,
+      "customer_drafts": [
+        {
+          "id": 1,
+          "recipient": "Tauhid Zaman",
+          "subject": "Update on your Bulldog tee",
+          "status": "draft"
+        }
+      ],
+      "run": {
+        "model_requests": 17,
+        "input_tokens": 29019,
+        "output_tokens": 4164,
+        "tool_calls": 29
+      }
+    },
+    {
+      "id": 102,
+      "type": "rent_notice",
+      "subject": "Rent due",
+      "requester": "Elm City Properties",
+      "final_status": "resolved",
+      "short_outcome": "Rent notice handled: Facilities confirmed lease 1 rent of $2,400.00 due 2026-09-02, Accounting prepared the payment, and a human approved it.",
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "role_in_run": "Led the ticket and made the final call",
+          "tools_used": [
+            "get_ticket",
+            "get_today"
+          ],
+          "final_call": "Rent of $2,400 for lease 1 is due on 2026-09-02; keep payment request 2 pending human approval and do not mark the rent paid."
+        },
+        {
+          "agent": "facilities",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_cash_balance",
+            "get_lease_rent_due",
+            "get_ticket",
+            "get_today"
+          ],
+          "reports": [
+            "Ticket 102 matches lease 1: Elm City Properties' notice says rent is due in 2 days, and the lease record confirms monthly rent of $2,400 due 2026-09-02 for the Chapel Street shop. Today is 2026-08-31, so rent is due in 2 days (due soon), not overdue. Checking has $2,560 as of today, enough to cover rent, with $160 remaining after payment. Accounting queued payment request 2, pending human approval; no payment has been made."
+          ]
+        },
+        {
+          "agent": "accounting",
+          "role_in_run": "Delegated by Facilities",
+          "tools_used": [
+            "get_cash_balance",
+            "get_lease_rent_due",
+            "get_today",
+            "prepare_payment"
+          ],
+          "reports": [
+            "Queued rent payment request 2 for $2,400 for Chapel Street shop lease 1. Status: pending human approval; nothing has been paid. Checking balance is $2,560 as of 2026-08-31, and the lease rent is due 2026-09-02. If approved, $160 would remain."
+          ]
+        }
+      ],
+      "human_approvals": [
+        {
+          "payment_request_id": 2,
+          "what": "Lease 1 rent (Chapel Street shop, Elm City Properties)",
+          "amount": 2400.0,
+          "prepared_by": "accounting",
+          "approved_by": "JY",
+          "requested_at_utc": "2026-10-14 23:58:08 UTC",
+          "approved_at_utc": "2026-10-14 23:58:37 UTC",
+          "status": "paid",
+          "approved_after_run_finished": true
+        }
+      ],
+      "cash_change": -2400.0,
+      "customer_drafts": [],
+      "run": {
+        "model_requests": 9,
+        "input_tokens": 13703,
+        "output_tokens": 1553,
+        "tool_calls": 12
+      }
+    },
+    {
+      "id": 103,
+      "type": "price_override",
+      "subject": "Bulk hoodie discount",
+      "requester": "Yale AI Club",
+      "final_status": "resolved",
+      "short_outcome": "No price override approved yet: only 8 of 20 size M hoodies are in stock and the customer gave no target price. Customer Service saved a reply draft asking for it (not sent). No payment or purchase was made.",
+      "agent_contributions": [
+        {
+          "agent": "boss",
+          "role_in_run": "Led the ticket and made the final call",
+          "tools_used": [
+            "get_ticket",
+            "get_today"
+          ],
+          "final_call": "Do not approve a price override yet because the customer did not specify a target price; request that price while advising only 8 of 20 size-M hoodies are currently in stock."
+        },
+        {
+          "agent": "inventory",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_inventory",
+            "get_today",
+            "get_vendors"
+          ],
+          "reports": [
+            "CC-HOOD-NAVY, size M: 8 units are in stock, so the requested 20 cannot be fulfilled from current stock. The shortfall is 12 units. Bulldog Print Co matches the apparel reprint specialty and has a 5-day lead time; estimated arrival is 2026-09-05, based on shop date 2026-08-31. The vendor has no open invoices."
+          ]
+        },
+        {
+          "agent": "accounting",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_sku_pricing"
+          ],
+          "reports": [
+            "For CC-HOOD-NAVY, unit cost is $22.00 and list price is $58.00. The highest discount that stays at or above cost is $36.00 per unit (62.07% off), yielding a $22.00 price at cost with $0.00 margin. For 20 units, that is $440.00 total at cost versus $1,160.00 at list, a $720.00 total discount and $0.00 total margin. Any price above $22.00 preserves a positive margin; a 62.07% discount is the break-even ceiling, not a profitable discount recommendation."
+          ]
+        },
+        {
+          "agent": "customer_service",
+          "role_in_run": "Delegated by Boss",
+          "tools_used": [
+            "get_ticket",
+            "save_customer_draft"
+          ],
+          "reports": [
+            "Saved draft 2 for ticket 103 on the board only; no message was sent. Recipient: Yale AI Club. Subject: Re: Bulk hoodie discount. The draft explains 8 of 20 CC-HOOD-NAVY size M hoodies are available, says the remaining 12 would require a restock with an estimated 5-day lead time, and asks for the target per-unit price. No restock, delivery date, or price was promised or quoted."
+          ]
+        }
+      ],
+      "human_approvals": "none needed (no payment or purchase on this ticket)",
+      "cash_change": 0,
+      "customer_drafts": [
+        {
+          "id": 2,
+          "recipient": "Yale AI Club",
+          "subject": "Re: Bulk hoodie discount",
+          "status": "draft"
+        }
+      ],
+      "run": {
+        "model_requests": 11,
+        "input_tokens": 17391,
+        "output_tokens": 3063,
+        "tool_calls": 11
+      }
+    }
+  ],
+  "notes": [
+    "A ticket is marked resolved when its agent run finishes; cash only moves later, when a human approves a prepared payment.",
+    "There is no purchase-order tool, so restocking (for example 12 hoodies) is not handled."
+  ]
+}

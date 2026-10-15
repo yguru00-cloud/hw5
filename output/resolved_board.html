@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Campus Customs - Resolved Board</title>
+<style>
+  body { margin: 0; font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; background: #f5f6f8; color: #1c2330; line-height: 1.5; }
+  header { padding: 24px 32px 0; }
+  header h1 { margin: 0 0 4px; font-size: 1.5rem; }
+  header p { margin: 0; color: #6b7385; }
+  main { max-width: 1100px; margin: 0 auto; padding: 16px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #d9dde5; border-radius: 10px; overflow: hidden; }
+  th, td { text-align: left; padding: 9px 12px; border-bottom: 1px solid #e6e9ef; }
+  th { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; color: #6b7385; background: #f0f3fa; }
+  td.num { text-align: right; font-variant-numeric: tabular-nums; }
+  .total td { font-weight: 700; background: #f6f8fd; }
+  .ticket { background: #fff; border: 1px solid #d9dde5; border-radius: 12px; padding: 18px 20px 20px; margin-top: 22px; }
+  .ticket h2 { margin: 0 0 6px; font-size: 1.2rem; }
+  .pill { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; background: #d9f0e1; color: #1d7a45; border-radius: 999px; padding: 2px 10px; vertical-align: middle; }
+  .outcome { margin: 0 0 6px; }
+  .meta { margin: 0 0 12px; color: #6b7385; font-size: 0.92rem; }
+  img { width: 100%; height: auto; border: 1px solid #d9dde5; border-radius: 8px; display: block; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Campus Customs - Resolved Board</h1>
+  <p>One screenshot of the React dashboard for each resolved ticket. Click an image to open it full size.</p>
+</header>
+<main>
+  <table>
+    <thead><tr><th>Ticket</th><th>Subject</th><th>Status</th><th>Cash change</th></tr></thead>
+    <tbody><tr><td>101</td><td>Bulldog tee</td><td>resolved</td><td class="num">-$840.00</td></tr><tr><td>102</td><td>Rent due</td><td>resolved</td><td class="num">-$2,400.00</td></tr><tr><td>103</td><td>Bulk hoodie discount</td><td>resolved</td><td class="num">$0.00</td></tr>
+      <tr class="total"><td colspan="3">Checking balance: $3,400.00 at the start, $160.00 at the end (matches the working database)</td><td class="num">-$3,240.00</td></tr>
+    </tbody>
+  </table>
+  <section class="ticket">
+    <h2>Ticket 101: Bulldog tee <span class="pill">resolved</span></h2>
+    <p class="outcome">Order not fulfilled yet: CC-TEE-WHITE size S has 0 in stock and Bulldog Print Co will not ship while invoice 501 ($840.00) is unpaid. Accounting prepared the $840.00 payment, a human approved it, and Customer Service saved a delay note for Tauhid Zaman (a draft, not sent).</p>
+    <p class="meta">Agents: Boss, Inventory, Accounting, Customer Service &middot; Cash change: <strong>-$840.00</strong></p>
+    <a href="resolved_101.png"><img src="resolved_101.png" alt="React dashboard with ticket 101 selected and resolved"></a>
+  </section>
+  <section class="ticket">
+    <h2>Ticket 102: Rent due <span class="pill">resolved</span></h2>
+    <p class="outcome">Rent notice handled: Facilities confirmed lease 1 rent of $2,400.00 due 2026-09-02, Accounting prepared the payment, and a human approved it.</p>
+    <p class="meta">Agents: Boss, Facilities, Accounting &middot; Cash change: <strong>-$2,400.00</strong></p>
+    <a href="resolved_102.png"><img src="resolved_102.png" alt="React dashboard with ticket 102 selected and resolved"></a>
+  </section>
+  <section class="ticket">
+    <h2>Ticket 103: Bulk hoodie discount <span class="pill">resolved</span></h2>
+    <p class="outcome">No price override approved yet: only 8 of 20 size M hoodies are in stock and the customer gave no target price. Customer Service saved a reply draft asking for it (not sent). No payment or purchase was made.</p>
+    <p class="meta">Agents: Boss, Inventory, Accounting, Customer Service &middot; Cash change: <strong>$0.00 (no payment)</strong></p>
+    <a href="resolved_103.png"><img src="resolved_103.png" alt="React dashboard with ticket 103 selected and resolved"></a>
+  </section>
+</main>
+</body>
+</html>
